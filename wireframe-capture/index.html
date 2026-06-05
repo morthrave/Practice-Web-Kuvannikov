@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UX Wireframe</title>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --canvas: #F2F2F2;
+      --frame: #FFFFFF;
+      --section: #F2F2F2;
+      --card: #FFFFFF;
+      --fill: #F2F2F2;
+      --fill-strong: #E0E0E0;
+      --stroke: #9E9E9E;
+      --stroke-soft: #BDBDBD;
+      --text-line: #BDBDBD;
+      --text-strong: #9E9E9E;
+      --black: #666666;
+    }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--black);
+    }
+
+    .board {
+      display: flex;
+      align-items: flex-start;
+      gap: 84px;
+      padding: 72px;
+      background: var(--canvas);
+    }
+
+    .frame {
+      position: relative;
+      flex: 0 0 auto;
+      background: var(--frame);
+      border: 1px solid #666666;
+      overflow: hidden;
+    }
+
+    .desktop { width: 1280px; }
+    .tablet { width: 768px; }
+    .mobile { width: 320px; }
+
+    .frame-title {
+      position: absolute;
+      left: 0;
+      top: -32px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #666666;
+    }
+
+    .container { margin: 0 auto; }
+    .desktop .container { width: 1120px; }
+    .tablet .container { width: 720px; }
+    .mobile .container { width: 288px; }
+
+    .section {
+      padding: 30px 0;
+      border-bottom: 1px solid var(--stroke-soft);
+      background: var(--frame);
+    }
+
+    .section.alt { background: var(--section); }
+    .mobile .section { padding: 24px 0; }
+
+    .section-label {
+      min-height: 18px;
+      width: 190px;
+      margin: 0 auto 24px;
+      border: 0;
+      background: transparent;
+      color: #666666;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 18px;
+      text-align: center;
+    }
+
+    .mobile .section-label {
+      width: 132px;
+      min-height: 14px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    .box,
+    .card,
+    .button,
+    .input,
+    .chip,
+    .icon,
+    .avatar,
+    .logo-block {
+      border: 1px solid var(--stroke);
+      background: var(--card);
+    }
+
+    .card {
+      padding: 14px;
+      background: var(--card);
+    }
+
+    .input {
+      height: 36px;
+      background: #FFFFFF;
+    }
+
+    .button {
+      height: 34px;
+      background: #FFFFFF;
+    }
+
+    .line {
+      display: block;
+      min-height: 14px;
+      margin: 6px 0;
+      background: transparent;
+      color: #666666;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    .line.strong {
+      background: transparent;
+      color: #666666;
+      font-weight: 700;
+    }
+
+    .line.tiny {
+      min-height: 12px;
+      margin: 4px 0;
+      font-size: 10px;
+      line-height: 12px;
+    }
+    .w20 { width: 20%; }
+    .w30 { width: 30%; }
+    .w40 { width: 40%; }
+    .w50 { width: 50%; }
+    .w60 { width: 60%; }
+    .w70 { width: 70%; }
+    .w80 { width: 80%; }
+    .w90 { width: 90%; }
+    .w100 { width: 100%; }
+
+    .image {
+      border: 1px solid var(--stroke);
+      background:
+        linear-gradient(to top right, transparent calc(50% - 1px), #9E9E9E 50%, transparent calc(50% + 1px)),
+        linear-gradient(to bottom right, transparent calc(50% - 1px), #9E9E9E 50%, transparent calc(50% + 1px)),
+        var(--fill);
+    }
+
+    .icon,
+    .avatar {
+      border-radius: 50%;
+      background: #FFFFFF;
+    }
+
+    .icon { width: 30px; height: 30px; }
+    .avatar { width: 42px; height: 42px; }
+
+    .logo-block {
+      width: 150px;
+      height: 34px;
+      background: #FFFFFF;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .stack { display: grid; gap: 10px; }
+
+    .header-top {
+      height: 38px;
+      border-bottom: 1px solid var(--stroke-soft);
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-main {
+      height: 66px;
+      border-bottom: 1px solid var(--stroke);
+      background: var(--frame);
+      display: flex;
+      align-items: center;
+    }
+
+    .desktop .header-links { width: 500px; }
+    .tablet .header-links { width: 370px; }
+
+    .desktop .catalog { width: 178px; }
+    .tablet .catalog { width: 132px; }
+    .catalog { height: 36px; background: #FFFFFF; }
+
+    .search { flex: 1; height: 36px; display: flex; }
+    .search .input { flex: 1; border-right: none; }
+    .search .button { width: 90px; }
+    .tablet .search .button { width: 70px; }
+
+    .mobile-header {
+      height: 58px;
+      border-bottom: 1px solid var(--stroke);
+      background: var(--frame);
+      display: none;
+      align-items: center;
+    }
+
+    .mobile .header-top,
+    .mobile .header-main { display: none; }
+    .mobile .mobile-header { display: flex; }
+    .mobile .logo-block { width: 92px; height: 28px; }
+    .mobile .icon { width: 24px; height: 24px; }
+
+    .hero-layout {
+      display: grid;
+      gap: 16px;
+    }
+
+    .desktop .hero-layout { grid-template-columns: 2fr 1fr; }
+    .tablet .hero-layout,
+    .mobile .hero-layout { grid-template-columns: 1fr; }
+
+    .hero-main {
+      min-height: 300px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+      background: #FFFFFF;
+      border: 1px solid var(--stroke);
+    }
+
+    .tablet .hero-main { min-height: 250px; }
+    .mobile .hero-main {
+      min-height: 198px;
+      grid-template-columns: 1fr;
+      padding: 18px;
+      gap: 14px;
+    }
+
+    .hero-main .image { height: 210px; }
+    .tablet .hero-main .image { height: 170px; }
+    .mobile .hero-main .image { height: 72px; }
+
+    .promo-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .promo {
+      height: 142px;
+      padding: 18px;
+      border: 1px solid var(--stroke);
+      background: #FFFFFF;
+    }
+
+    .mobile .promo { height: 90px; padding: 12px; }
+
+    .promo-row {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .desktop .promo-row { grid-template-columns: repeat(4, 1fr); }
+    .tablet .promo-row { grid-template-columns: repeat(2, 1fr); }
+    .mobile .promo-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .promo-row .image { height: 110px; }
+    .mobile .promo-row .image { height: 68px; }
+
+    .benefits-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .desktop .benefits-grid { grid-template-columns: repeat(4, 1fr); }
+    .tablet .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .mobile .benefits-grid { grid-template-columns: 1fr; gap: 10px; }
+
+    .benefit {
+      min-height: 74px;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--stroke);
+      background: var(--card);
+    }
+
+    .benefit .icon { width: 42px; height: 42px; }
+
+    .category-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .desktop .category-grid { grid-template-columns: repeat(6, 1fr); }
+    .tablet .category-grid { grid-template-columns: repeat(4, 1fr); }
+    .mobile .category-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+    .category {
+      height: 106px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid var(--stroke);
+      background: var(--card);
+    }
+
+    .category .icon {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 12px;
+      background: #FFFFFF;
+    }
+
+    .mobile .category { height: 88px; padding: 10px; }
+    .mobile .category .icon { width: 34px; height: 34px; margin-bottom: 8px; }
+
+    .product-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .desktop .product-grid { grid-template-columns: repeat(4, 1fr); }
+    .tablet .product-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .mobile .product-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+    .product-card {
+      position: relative;
+      min-height: 312px;
+      border: 1px solid var(--stroke);
+      padding: 12px;
+      background: var(--card);
+    }
+
+    .tablet .product-card { min-height: 280px; }
+    .mobile .product-card { min-height: 214px; padding: 8px; }
+
+    .badge {
+      width: 42px;
+      height: 20px;
+      border: 1px solid var(--stroke);
+      background: var(--fill-strong);
+    }
+
+    .fav {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--stroke);
+      border-radius: 50%;
+      background: #FFFFFF;
+    }
+
+    .product-card .image {
+      height: 126px;
+      margin: 12px 0;
+    }
+
+    .tablet .product-card .image { height: 108px; }
+    .mobile .product-card .image {
+      height: 72px;
+      margin: 8px 0;
+    }
+
+    .swatches {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border: 1px solid var(--stroke);
+      border-radius: 50%;
+      background: #FFFFFF;
+    }
+
+    .rating {
+      display: block;
+      margin-top: 10px;
+      color: #666666;
+      font-size: 10px;
+      line-height: 12px;
+    }
+
+    .rating span {
+      background: transparent;
+    }
+
+    .split {
+      display: grid;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .desktop .split { grid-template-columns: 1fr 1fr; }
+    .tablet .split { grid-template-columns: 1fr 1fr; }
+    .mobile .split { grid-template-columns: 1fr; }
+
+    .subscription,
+    .about,
+    .contact-panel {
+      padding: 24px;
+      border: 1px solid var(--stroke);
+      background: #FFFFFF;
+    }
+
+    .mobile .subscription,
+    .mobile .about,
+    .mobile .contact-panel {
+      padding: 16px;
+    }
+
+    .subscription .image,
+    .about .image,
+    .contact-panel .image { height: 210px; }
+    .tablet .subscription .image,
+    .tablet .about .image,
+    .tablet .contact-panel .image { height: 172px; }
+    .mobile .subscription .image,
+    .mobile .about .image,
+    .mobile .contact-panel .image { height: 116px; }
+
+    .form-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .desktop .form-grid { grid-template-columns: repeat(2, 1fr); }
+    .tablet .form-grid { grid-template-columns: repeat(2, 1fr); }
+    .mobile .form-grid { grid-template-columns: 1fr; }
+
+    .textarea { height: 96px; }
+    .desktop .textarea,
+    .tablet .textarea { grid-column: 1 / -1; }
+
+    .brand-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .desktop .brand-grid { grid-template-columns: repeat(6, 1fr); }
+    .tablet .brand-grid { grid-template-columns: repeat(4, 1fr); }
+    .mobile .brand-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+    .brand {
+      height: 72px;
+      border: 1px solid var(--stroke);
+      background:
+        linear-gradient(to top right, transparent calc(50% - 1px), #9E9E9E 50%, transparent calc(50% + 1px)),
+        linear-gradient(to bottom right, transparent calc(50% - 1px), #9E9E9E 50%, transparent calc(50% + 1px)),
+        #F2F2F2;
+    }
+
+    .mobile .brand { height: 52px; }
+
+    .review-grid,
+    .blog-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .desktop .review-grid,
+    .desktop .blog-grid { grid-template-columns: repeat(3, 1fr); }
+    .tablet .review-grid,
+    .tablet .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    .mobile .review-grid,
+    .mobile .blog-grid { grid-template-columns: 1fr; gap: 12px; }
+
+    .review-card,
+    .blog-card {
+      border: 1px solid var(--stroke);
+      background: #FFFFFF;
+      padding: 14px;
+    }
+
+    .blog-card .image { height: 130px; margin-bottom: 12px; }
+    .mobile .blog-card .image { height: 92px; }
+
+    .footer {
+      background: #666666;
+      border-top: 1px solid var(--stroke);
+      padding: 32px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .desktop .footer-grid { grid-template-columns: 1.2fr repeat(4, 1fr); }
+    .tablet .footer-grid { grid-template-columns: repeat(3, 1fr); }
+    .mobile .footer-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    .footer-col {
+      min-height: 110px;
+      border: 1px solid #9E9E9E;
+      background: #666666;
+      padding: 14px;
+    }
+
+    .footer .line {
+      background: transparent;
+      color: #BDBDBD;
+    }
+
+    .footer .line.strong {
+      background: transparent;
+      color: #FFFFFF;
+    }
+
+    .floating {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mobile .floating {
+      right: 12px;
+      bottom: 12px;
+      gap: 8px;
+    }
+
+    .floating .icon {
+      width: 42px;
+      height: 42px;
+      background: #FFFFFF;
+    }
+
+    .mobile .floating .icon {
+      width: 34px;
+      height: 34px;
+    }
+  </style>
+</head>
+<body>
+  <main class="board">
+    <section class="frame desktop" data-frame="desktop">
+      <div class="frame-title">UX Main page 1280</div>
+    </section>
+
+    <section class="frame tablet" data-frame="tablet">
+      <div class="frame-title">UX Main page 768</div>
+    </section>
+
+    <section class="frame mobile" data-frame="mobile">
+      <div class="frame-title">UX Main page 320</div>
+    </section>
+  </main>
+
+  <script>
+    const productSections = [
+      'Вы уже смотрели',
+      'Акции и скидки',
+      'Популярные товары',
+      'Новинки'
+    ];
+
+    const configs = {
+      desktop: {
+        categories: 12,
+        benefits: 4,
+        products: 4,
+        promos: 2,
+        promoRow: 4,
+        brands: 12,
+        reviews: 3,
+        blog: 3,
+        footerCols: 5
+      },
+      tablet: {
+        categories: 8,
+        benefits: 4,
+        products: 3,
+        promos: 2,
+        promoRow: 4,
+        brands: 8,
+        reviews: 2,
+        blog: 2,
+        footerCols: 6
+      },
+      mobile: {
+        categories: 8,
+        benefits: 4,
+        products: 2,
+        promos: 2,
+        promoRow: 4,
+        brands: 6,
+        reviews: 2,
+        blog: 2,
+        footerCols: 5
+      }
+    };
+
+    const line = (cls = 'w70') => `<span class="line ${cls}">Text</span>`;
+    const titleLines = () => `${line('strong w70')}${line('strong w50')}`;
+    const paragraph = () => `${line('w90')}${line('w80')}${line('w60')}`;
+
+    function section(label, content, alt = false) {
+      return `
+        <section class="section ${alt ? 'alt' : ''}">
+          <div class="container">
+            ${label ? '<div class="section-label">Text</div>' : ''}
+            ${content}
+          </div>
+        </section>
+      `;
+    }
+
+    function desktopTop(frame) {
+      return `
+        <div class="header-top">
+          <div class="container between">
+            <div class="row header-links">
+              ${line('tiny w20')}${line('tiny w20')}${line('tiny w20')}${line('tiny w20')}${line('tiny w20')}
+            </div>
+            <div class="row" style="width: 300px; justify-content: flex-end;">
+              ${line('tiny w40')}${line('tiny w30')}${line('tiny w20')}
+            </div>
+          </div>
+        </div>
+        <div class="header-main">
+          <div class="container between">
+            <div class="logo-block"></div>
+            <div class="button catalog"></div>
+            <div class="search"><div class="input"></div><div class="button"></div></div>
+            <div class="row">
+              <div class="icon"></div><div class="icon"></div><div class="icon"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mobile-header">
+          <div class="container between">
+            <div class="icon"></div>
+            <div class="logo-block"></div>
+            <div class="row">
+              <div class="icon"></div><div class="icon"></div><div class="icon"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function hero(cfg) {
+      const promos = Array.from({ length: cfg.promos }, () => `
+        <div class="promo">
+          ${line('strong w60')}
+          ${line('w80')}
+          ${line('w45')}
+          <div class="button" style="width: 46%; margin-top: 16px;"></div>
+        </div>
+      `).join('');
+
+      const promoRow = Array.from({ length: cfg.promoRow }, () => `<div class="image"></div>`).join('');
+
+      return section('', `
+        <div class="hero-layout">
+          <div class="hero-main">
+            <div>
+              ${titleLines()}
+              ${paragraph()}
+              <div class="button" style="width: 150px; margin-top: 20px;"></div>
+            </div>
+            <div class="image"></div>
+          </div>
+          <div class="promo-stack">${promos}</div>
+        </div>
+        <div class="promo-row">${promoRow}</div>
+      `);
+    }
+
+    function benefits(cfg) {
+      const items = Array.from({ length: cfg.benefits }, () => `
+        <div class="benefit">
+          <div class="icon"></div>
+          <div>${line('strong w80')}${line('w60')}</div>
+        </div>
+      `).join('');
+
+      return section('', `<div class="benefits-grid">${items}</div>`, true);
+    }
+
+    function categories(cfg) {
+      const items = Array.from({ length: cfg.categories }, () => `
+        <div class="category">
+          <div class="icon"></div>
+          ${line('w70')}
+          ${line('tiny w50')}
+        </div>
+      `).join('');
+
+      return section(true, `<div class="category-grid">${items}</div>`);
+    }
+
+    function productCard() {
+      return `
+        <div class="product-card">
+          <div class="badge"></div>
+          <div class="fav"></div>
+          <div class="image"></div>
+          ${line('strong w40')}
+          ${line('w90')}
+          ${line('w70')}
+          <div class="swatches">
+            <div class="swatch"></div><div class="swatch"></div><div class="swatch"></div>
+          </div>
+          <div class="rating"><span>Text</span></div>
+        </div>
+      `;
+    }
+
+    function products(cfg, title, index) {
+      const cards = Array.from({ length: cfg.products }, productCard).join('');
+      return section(true, `<div class="product-grid">${cards}</div>`, index % 2 === 1);
+    }
+
+    function subscription() {
+      return section('', `
+        <div class="subscription split">
+          <div class="image"></div>
+          <div class="stack">
+            ${titleLines()}
+            ${paragraph()}
+            <div class="row">
+              <div class="input" style="flex: 1;"></div>
+              <div class="button" style="width: 120px;"></div>
+            </div>
+          </div>
+        </div>
+      `, true);
+    }
+
+    function about() {
+      return section(true, `
+        <div class="about split">
+          <div>
+            ${titleLines()}
+            ${paragraph()}
+            ${paragraph()}
+            <div class="button" style="width: 128px; margin-top: 16px;"></div>
+          </div>
+          <div class="image"></div>
+        </div>
+      `);
+    }
+
+    function brands(cfg) {
+      const items = Array.from({ length: cfg.brands }, () => `<div class="brand"></div>`).join('');
+      return section(true, `<div class="brand-grid">${items}</div>`, true);
+    }
+
+    function contact() {
+      return section(true, `
+        <div class="contact-panel split">
+          <div class="form-grid">
+            <div class="input"></div>
+            <div class="input"></div>
+            <div class="input"></div>
+            <div class="input"></div>
+            <div class="input textarea"></div>
+            <div class="row" style="grid-column: 1 / -1;">
+              <div class="chip" style="width: 18px; height: 18px;"></div>
+              ${line('tiny w70')}
+            </div>
+            <div class="button" style="width: 150px;"></div>
+          </div>
+          <div class="image"></div>
+        </div>
+      `);
+    }
+
+    function reviews(cfg) {
+      const items = Array.from({ length: cfg.reviews }, () => `
+        <div class="review-card">
+          <div class="row">
+            <div class="avatar"></div>
+            <div style="flex: 1;">${line('strong w60')}${line('tiny w40')}</div>
+          </div>
+          ${line('strong w40')}
+          ${paragraph()}
+        </div>
+      `).join('');
+
+      return section(true, `<div class="review-grid">${items}</div>`, true);
+    }
+
+    function blog(cfg) {
+      const items = Array.from({ length: cfg.blog }, () => `
+        <div class="blog-card">
+          <div class="image"></div>
+          ${line('tiny w30')}
+          ${line('strong w80')}
+          ${line('strong w50')}
+          ${paragraph()}
+          <div class="button" style="width: 110px; margin-top: 12px;"></div>
+        </div>
+      `).join('');
+
+      return section(true, `<div class="blog-grid">${items}</div>`);
+    }
+
+    function footer(cfg) {
+      const cols = Array.from({ length: cfg.footerCols }, () => `
+        <div class="footer-col">
+          ${line('strong w70')}
+          ${line('w90')}
+          ${line('w80')}
+          ${line('w60')}
+          ${line('w70')}
+        </div>
+      `).join('');
+
+      return `
+        <footer class="footer">
+          <div class="container footer-grid">${cols}</div>
+        </footer>
+      `;
+    }
+
+    function floating() {
+      return `
+        <div class="floating">
+          <div class="icon"></div>
+          <div class="icon"></div>
+        </div>
+      `;
+    }
+
+    function buildFrame(frame) {
+      const type = frame.dataset.frame;
+      const cfg = configs[type];
+
+      frame.insertAdjacentHTML('beforeend',
+        desktopTop(type) +
+        hero(cfg) +
+        benefits(cfg) +
+        categories(cfg) +
+        productSections.map((name, index) => products(cfg, name, index)).join('') +
+        subscription() +
+        about() +
+        brands(cfg) +
+        contact() +
+        reviews(cfg) +
+        blog(cfg) +
+        footer(cfg) +
+        floating()
+      );
+    }
+
+    document.querySelectorAll('.frame').forEach(buildFrame);
+  </script>
+</body>
+</html>

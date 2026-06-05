@@ -1,0 +1,33 @@
+# macOS service files
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor and OS noise
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+
+# Temporary and backup files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*~
+
+# Logs and local runtime output
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency folders are not used in this project, but should never be committed accidentally.
+node_modules/
+
+# Build output is not used here, but these folders are common accidental commits.
+dist/
+build/
