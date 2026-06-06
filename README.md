@@ -14,10 +14,6 @@
 | `Word docs/` | Исходные документы и style guide. |
 | `wireframe-capture/` | Wireframe/reference capture. |
 
-В reference-папках есть короткие `README.md`, которые поясняют назначение материалов.
-
-> В текущей рабочей папке найдены `task-3`, `task-4`, `task-5` и `task-6`. Если `task-1` и `task-2` также нужны для сдачи в одном репозитории, их стоит добавить отдельными папками `task-1/` и `task-2/`.
-
 ## Выполненные задания
 
 | Task | Description | Technologies |
