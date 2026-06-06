@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Практика Web — Bērnu Veikals</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5f9;
+      color: #090f24;
+    }
+
+    main {
+      width: min(100% - 32px, 860px);
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 5vw, 46px);
+      line-height: 1.15;
+    }
+
+    p {
+      margin: 0 0 32px;
+      color: #686878;
+      font-size: 17px;
+    }
+
+    .tasks {
+      display: grid;
+      gap: 18px;
+    }
+
+    a {
+      display: block;
+      padding: 24px;
+      border-radius: 18px;
+      background: #ffffff;
+      color: #090f24;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(9, 15, 36, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px rgba(9, 15, 36, 0.14);
+    }
+
+    strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 22px;
+    }
+
+    span {
+      color: #686878;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Практика Web — Bērnu Veikals</h1>
+    <p>Выберите задание для просмотра.</p>
+
+    <div class="tasks">
+      <a href="./task-4/">
+        <strong>Задание 1</strong>
+        <span>CSS-стилизация, hover-эффекты, тени, градиенты, фильтры и анимации.</span>
+      </a>
+
+      <a href="./task-6/">
+        <strong>Задание 2</strong>
+        <span>Bootstrap 5 страница с подключенными виджетами и каруселью.</span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
